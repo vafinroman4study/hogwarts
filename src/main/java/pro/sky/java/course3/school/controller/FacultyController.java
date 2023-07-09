@@ -1,5 +1,6 @@
 package pro.sky.java.course3.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course3.school.model.Faculty;
 import pro.sky.java.course3.school.service.FacultyService;
@@ -16,28 +17,33 @@ public class FacultyController {
     }
 
     @PostMapping("add")
-    public Faculty addFaculty(@RequestParam String name, String color) {
-        Faculty faculty = new Faculty(0L, name, color);
+    public Faculty addFaculty(@RequestBody Faculty faculty) {
+        //Faculty faculty = new Faculty(0L, name, color);
         return facultyService.addFaculty(faculty);
     }
 
     @DeleteMapping("delete")
-    public Faculty deleteStudent(@RequestParam Long id) {
-        return facultyService.deleteFaculty(id);
+    public ResponseEntity<Faculty> deleteFaculty(@RequestParam Long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("update")
-    public Faculty updateStudent(@RequestBody Faculty faculty) {
+    public Faculty updateFaculty(@RequestBody Faculty faculty) {
         return facultyService.updateFaculty(faculty);
     }
 
     @GetMapping("get")
-    public Faculty getStudent(@RequestParam Long id) {
+    public Faculty getFaculty(@RequestParam Long id) {
         return facultyService.getFaculty(id);
+    }
+    @GetMapping()
+    public List<Faculty> getAllFaculties() {
+        return facultyService.getAllFaculties();
     }
 
     @GetMapping("color/{color}")
-    public List filterByAge(@PathVariable("color") String color) {
+    public List filterByColor(@PathVariable("color") String color) {
         return facultyService.filterByColor(color);
     }
 

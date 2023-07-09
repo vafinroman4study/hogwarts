@@ -1,10 +1,10 @@
 package pro.sky.java.course3.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course3.school.model.Student;
 import pro.sky.java.course3.school.service.StudentService;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -17,14 +17,15 @@ public class StudentController {
     }
 
     @PostMapping("add")
-    public Student addStudent(@RequestParam String name, int age) {
-        Student student = new Student(0L, name, age);
+    public Student addStudent(@RequestBody Student student) {
+        //Student student = new Student(0L, name, age);
         return studentService.addStudent(student);
     }
 
     @DeleteMapping("delete")
-    public Student deleteStudent(@RequestParam Long id) {
-        return studentService.deleteStudent(id);
+    public ResponseEntity<Student> deleteStudent(@RequestParam Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("update")
@@ -35,6 +36,11 @@ public class StudentController {
     @GetMapping("get")
     public Student getStudent(@RequestParam Long id) {
         return studentService.getStudent(id);
+    }
+
+    @GetMapping()
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
     @GetMapping("age/{age}")
