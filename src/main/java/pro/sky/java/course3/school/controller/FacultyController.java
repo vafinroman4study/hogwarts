@@ -3,7 +3,6 @@ package pro.sky.java.course3.school.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course3.school.model.Faculty;
-import pro.sky.java.course3.school.model.Student;
 import pro.sky.java.course3.school.service.FacultyService;
 
 import java.util.List;
@@ -48,8 +47,4 @@ public class FacultyController {
         return facultyService.filterByColor(color);
     }
 
-    @GetMapping("students/{id}")
-    public List<Student> getStudents(@PathVariable("id") Long id) {
-        return facultyService.getStudents(id);
-    }
 }

@@ -47,12 +47,4 @@ public class StudentController {
     public List filterByAge(@PathVariable("age") int age) {
         return studentService.filterByAge(age);
     }
-    @GetMapping("age/")
-    public List filterByAgeBetween(@RequestParam int min, int max) {
-        return studentService.filterByAgeBetween(min, max);
-    }
-    @GetMapping("faculty/{id}")
-    public String filterByAgeBetween(@PathVariable("id") Long id) {
-        return studentService.getFacultyName(id);
-    }
 }
