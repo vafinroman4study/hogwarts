@@ -15,5 +15,9 @@ public interface StudentService {
 
     List filterByAge(int age);
 
+    List filterByAgeBetween(int min, int max);
+
     List<Student> getAllStudents();
+
+    String getFacultyName(Long id);
 }

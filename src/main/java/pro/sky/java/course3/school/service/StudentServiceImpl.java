@@ -38,7 +38,18 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
+    public List filterByAgeBetween(int min, int max) {
+        return studentRepository.findByAgeBetween(min, max);
+    }
+
+    @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public String getFacultyName(Long id) {
+        Student student = studentRepository.findById(id).get();
+        return student.getFaculty().getName();
     }
 }
